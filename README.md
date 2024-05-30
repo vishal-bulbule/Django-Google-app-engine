@@ -1,6 +1,8 @@
 # test
 
 Creating a simple notes application using Django involves several steps. Below is a step-by-step guide to help you get started:
+To add a header to all your HTML files in your Django project, you should use Django’s template inheritance feature. This involves creating a base template that includes the common elements (like the header) and then extending this base template in your other templates. Here’s how you can do it:
+
 
 ### Step 1: Set Up Your Django Project
 
@@ -135,20 +137,29 @@ Creating a simple notes application using Django involves several steps. Below i
    - `note_list.html`:
      ```html
      <!DOCTYPE html>
-     <html>
-     <head>
-         <title>Notes</title>
-     </head>
-     <body>
-         <h1>Notes</h1>
-         <ul>
-             {% for note in notes %}
-             <li><a href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></li>
-             {% endfor %}
-         </ul>
-         <a href="{% url 'note_create' %}">Add a new note</a>
-     </body>
-     </html>
+      <html> 
+      <head>
+          <title>{{ note.title }}</title>
+          <style>
+              body {font-family: Arial, sans-serif;}
+              .header {background-color: #362264;color: white;padding: 5px;text-align: center;}
+              .container {padding: 20px;}
+              form {margin-top: 20px;}
+          </style>
+      </head>    
+      <body>
+          <div class="header">
+               <h1>TechTrapture Notes</h1>
+          </div>
+          <h1>Notes</h1>
+          <ul>
+              {% for note in notes %}
+              <li><a href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></li>
+              {% endfor %}
+          </ul>
+          <a href="{% url 'note_create' %}">Add a new note</a>
+      </body>
+      </html>
      ```
 
    - `note_detail.html`:
@@ -157,31 +168,53 @@ Creating a simple notes application using Django involves several steps. Below i
      <html>
      <head>
          <title>{{ note.title }}</title>
+       <style>
+         body {font-family: Arial, sans-serif;}
+         .header {background-color: #362264;color: white;padding: 5px;text-align: center;}
+         .container {padding: 20px;}
+         form {margin-top: 20px;}
+     </style>
      </head>
-     <body>
-         <h1>{{ note.title }}</h1>
-         <p>{{ note.content }}</p>
-         <p><a href="{% url 'note_list' %}">Back to Notes</a></p>
-     </body>
+      <body>
+          <div class="header">
+              <h1>TechTrapture Notes</h1>
+          </div>
+          <h1>{{ note.title }}</h1>
+          <p>{{ note.content }}</p>
+          <p><a href="{% url 'note_list' %}">Back to Notes</a></p>
+      </body>
      </html>
      ```
 
    - `note_form.html`:
      ```html
-     <!DOCTYPE html>
-     <html>
-     <head>
-         <title>New Note</title>
-     </head>
-     <body>
-         <h1>New Note</h1>
-         <form method="post">
-             {% csrf_token %}
-             {{ form.as_p }}
-             <button type="submit">Save</button>
-         </form>
-     </body>
-     </html>
+         <!DOCTYPE html>
+         <html>
+         
+         <head>
+             <title>{{ note.title }}</title>
+           <style>
+               body {font-family: Arial, sans-serif;}
+               .header {background-color: #362264;color: white;padding: 5px;text-align: center;}
+               .container {padding: 20px;}
+               form {margin-top: 20px;}
+           </style>
+               
+         </head>
+         
+         <body>
+             <div class="header">
+                 <h1>TechTrapture Notes</h1>
+             </div>
+             <h1>New Note</h1>
+             <form method="post">
+                 {% csrf_token %}
+                 {{ form.as_p }}
+                 <button type="submit">Save</button>
+             </form>
+         </body>
+         
+         </html>
      ```
 
 ### Step 8: Run the Application
@@ -197,3 +230,83 @@ Creating a simple notes application using Django involves several steps. Below i
 ### Conclusion
 
 You've now created a simple notes application with Django that allows you to list, view, and create notes. This basic setup can be expanded with additional features like updating and deleting notes, user authentication, and more advanced styling with CSS frameworks like Bootstrap.
+
+
+To deploy your Django application on Google App Engine using an `app.yaml` configuration file, follow these steps:
+
+### Step 1: Set Up Your Django Project for Deployment
+
+1. **Create CloudSQL MySQL Instance**
+   Ensure you have CloudSQL MySQL Instance created and one database for application is created.
+
+2. **Update `settings.py`:**
+   Add the necessary configurations for static files and allowed hosts.
+   ```python
+       DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/tt-dev-001:us-central1:dev',
+            'PORT' : '3306',
+            'USER': 'root',
+            'PASSWORD': 'mysql',
+            'NAME': 'appdb',
+        }
+      }
+   ```
+
+3. **Create `requirements.txt`:**
+   Generate a `requirements.txt` file for the dependencies.
+   ```sh
+      Django
+      mysqlclient
+   ```
+
+4. **Create `app.yaml`:**
+   Create an `app.yaml` file in your project's root directory.
+   ```yaml
+      runtime: python39
+      service: noteapp
+   ```
+5. **Create `main.py`:**
+   Add the necessary configurations for static files and allowed hosts.
+   ```python
+      from notes_project.wsgi import application
+      app = application
+   ```
+
+### Step 2: Deploy to Google App Engine
+
+1. **Install Google Cloud SDK:**
+   If you haven’t already, install the Google Cloud SDK by following the [installation guide](https://cloud.google.com/sdk/docs/install).
+
+2. **Initialize Your Google Cloud Project:**
+   ```sh
+   gcloud init
+   ```
+
+3. **Authenticate Your Google Cloud Account:**
+   ```sh
+   gcloud auth login
+   ```
+
+4. **Set the Project:**
+   ```sh
+   gcloud config set project YOUR_PROJECT_ID
+   ```
+
+5. **Deploy Your Application:**
+   Deploy your application to Google App Engine.
+   ```sh
+   gcloud app deploy
+   ```
+
+6. **Browse Your Application:**
+   Open your browser to view the deployed application.
+   ```sh
+   gcloud app browse
+   ```
+
+
+### Conclusion
+
+This guide walks you through setting up a Django application for deployment on Google App Engine. It includes steps for configuring your Django project, preparing it for deployment, and deploying it using the Google Cloud SDK. By following these steps, you can ensure your application is ready for a scalable and reliable deployment on Google App Engine.
