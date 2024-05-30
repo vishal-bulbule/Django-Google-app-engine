@@ -1,4 +1,4 @@
-# test
+# Deploy Django Notes application on Google App Engine with CloudSQL(MySQL)
 
 Creating a simple notes application using Django involves several steps. Below is a step-by-step guide to help you get started:
 To add a header to all your HTML files in your Django project, you should use Django’s template inheritance feature. This involves creating a base template that includes the common elements (like the header) and then extending this base template in your other templates. Here’s how you can do it:
