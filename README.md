@@ -232,7 +232,7 @@ Creating a simple notes application using Django involves several steps. Below i
 You've now created a simple notes application with Django that allows you to list, view, and create notes. This basic setup can be expanded with additional features like updating and deleting notes, user authentication, and more advanced styling with CSS frameworks like Bootstrap.
 
 
-To deploy your Django application on Google App Engine using an `app.yaml` configuration file, follow these steps:
+To deploy your Django application on Google App Engine , follow these steps:
 
 ### Step 1: Set Up Your Django Project for Deployment
 
@@ -261,13 +261,34 @@ To deploy your Django application on Google App Engine using an `app.yaml` confi
       mysqlclient
    ```
 
-4. **Create `app.yaml`:**
+4. **Download and install the Cloud SQL Auth Proxy to your local machine.**
+   Right-click https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.11.3/cloud-sql-proxy.x64.exe and select Save Link As to download the Cloud SQL Auth Proxy. Rename the file to cloud-sql-proxy.exe.
+   In seperate terminal run Cloud SQL Auth Proxy
+   ```sh
+      ./cloud-sql-proxy PROJECT_ID:REGION:INSTANCE_NAME
+   ```
+ 5. **Run the Django migrations to set up your models on New Database i.e Cloud SQL.**
+   ```sh
+      python manage.py makemigrations
+      python manage.py migrate
+  ```
+ Now run and Test Application locally
+
+  **Start the Development Server:**
+   ```sh
+   python manage.py runserver
+   ```
+
+ **Access the Application:**
+   Open your browser and navigate to `http://127.0.0.1:8000/notes/` to see your notes application in action.
+
+6. **Create `app.yaml`:**
    Create an `app.yaml` file in your project's root directory.
    ```yaml
       runtime: python39
       service: noteapp
    ```
-5. **Create `main.py`:**
+7. **Create `main.py`:**
    Add the necessary configurations for static files and allowed hosts.
    ```python
       from notes_project.wsgi import application
@@ -306,7 +327,12 @@ To deploy your Django application on Google App Engine using an `app.yaml` confi
    gcloud app browse
    ```
 
+To Map custom Domain Use  Below Link - [Mapping custom Domain to Google App Engine](https://cloud.google.com/appengine/docs/legacy/standard/python/mapping-custom-domains)
 
 ### Conclusion
 
 This guide walks you through setting up a Django application for deployment on Google App Engine. It includes steps for configuring your Django project, preparing it for deployment, and deploying it using the Google Cloud SDK. By following these steps, you can ensure your application is ready for a scalable and reliable deployment on Google App Engine.
+
+<img width="746" alt="image" src="https://github.com/vishal-bulbule/Django-Google-app-engine/assets/143475073/79ade334-5e0d-4dc3-b312-1ae25acf11e4">
+
+
