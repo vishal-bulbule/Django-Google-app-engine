@@ -1,7 +1,17 @@
 # Deploy Django Notes application on Google App Engine with CloudSQL(MySQL)
 
-Creating a simple notes application using Django involves several steps. Below is a step-by-step guide to help you get started:
+Learn how to deploy your Django application on Google App Engine, integrate it with Cloud SQL, and map it to a custom domain in this comprehensive tutorial. I'll guide you step-by-step through the entire process, from setting up your Google Cloud environment to configuring your Django app for production. Whether you're a beginner or an experienced developer, this video will help you get your Django project up and running smoothly on Google Cloud Platform.
 
+## Topics Covered:
+
+- Build and Test Django App in Local
+- Setting up Google App Engine
+- Deploy Django App on Google App Engine
+- Connecting Django to Cloud SQL (MySQL)
+- Mapping a custom domain to your app
+
+
+<img width="634" alt="image" src="https://github.com/vishal-bulbule/Django-Google-app-engine/assets/143475073/20c74e29-b23f-4816-91c5-169fac2acb31">
 
 
 ### Step 1: Set Up Your Django Project
