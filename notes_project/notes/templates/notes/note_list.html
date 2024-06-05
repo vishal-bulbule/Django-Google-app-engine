@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+ <html> 
+ <head>
+     <title>{{ note.title }}</title>
+     <style>
+         body {font-family: Arial, sans-serif;}
+         .header {background-color: #362264;color: white;padding: 5px;text-align: center;}
+         .container {padding: 20px;}
+         form {margin-top: 20px;}
+     </style>
+ </head>    
+ <body>
+     <div class="header">
+          <h1>TechTrapture Notes</h1>
+     </div>
+     <h1>Notes</h1>
+     <ul>
+         {% for note in notes %}
+         <li><a href="{% url 'note_detail' note.pk %}">{{ note.title }}</a></li>
+         {% endfor %}
+     </ul>
+     <a href="{% url 'note_create' %}">Add a new note</a>
+ </body>
+ </html>

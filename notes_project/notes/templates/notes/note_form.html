@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ note.title }}</title>
+  <style>
+      body {font-family: Arial, sans-serif;}
+      .header {background-color: #362264;color: white;padding: 5px;text-align: center;}
+      .container {padding: 20px;}
+      form {margin-top: 20px;}
+  </style>
+      
+</head>
+
+<body>
+    <div class="header">
+        <h1>TechTrapture Notes</h1>
+    </div>
+    <h1>New Note</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+
+</html>
