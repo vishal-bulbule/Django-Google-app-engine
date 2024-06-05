@@ -11,7 +11,7 @@ Learn how to deploy your Django application on Google App Engine, integrate it w
 - Mapping a custom domain to your app
 
 
-<img width="634" alt="image" src="https://github.com/vishal-bulbule/Django-Google-app-engine/assets/143475073/20c74e29-b23f-4816-91c5-169fac2acb31">
+<img width="636" alt="image" src="https://github.com/vishal-bulbule/Django-Google-app-engine/assets/143475073/1ecd1e87-cb7f-4ebf-b0cc-dcda3979be3f">
 
 
 ### Step 1: Set Up Your Django Project
